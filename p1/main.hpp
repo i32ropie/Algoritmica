@@ -11,7 +11,7 @@ void LU_decompos(std::vector< std::vector< double > > &a,int n,std::vector<uint>
         double big,sum,temp;
         d=1;
         /* search for the largest element in each row; save the scaling in the
-           temporary array vv and return zero if the matrix is singular */
+           temporary array vv */
         for(i=0; i<n; i++) {
                 big=0.;
                 for(j=0; j<n; j++) if((temp=fabs(a[i][j]))>big) big=temp;
@@ -54,10 +54,11 @@ void LU_decompos(std::vector< std::vector< double > > &a,int n,std::vector<uint>
 }
 
 double LU_determ(std::vector<std::vector< double > > &a,int n,std::vector<uint> &indx,int &d) {
-        register int j;
         double res= double(d);
-        for(j=0; j<n; j++) res*=a[j][j];
-        return(res);
+        for( uint j = 0 ; j < n ; j++ ){
+            res *= a[j][j];
+        }
+        return res;
 }
 
 double det_rec_1(const std::vector<std::vector< double>> matrix, const uint &size){
