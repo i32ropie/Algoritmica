@@ -2,9 +2,19 @@
 #define __MAIN_HPP__
 
 #include <vector>
+#include <map>
 #include <cmath>
+#include <fstream>
+#include <cstdio>
+#include <stdint.h> // Para usar uint64_t
+
 
 #define TINY 1.e-30
+
+uint64_t fibonacci(uint64_t x){
+    return x > 2?fibonacci(x-1)+fibonacci(x-2):x;
+}
+
 
 void LU_decompos(std::vector< std::vector< double > > &a,int n,std::vector<uint> &indx,int &d,std::vector<double> &vv) {
         register int i,imax,j,k;
@@ -53,7 +63,7 @@ void LU_decompos(std::vector< std::vector< double > > &a,int n,std::vector<uint>
         }
 }
 
-double LU_determ(std::vector<std::vector< double > > &a,int n,std::vector<uint> &indx,int &d) {
+double LU_determ(std::vector<std::vector< double > > &a,uint n,int &d) {
         double res= double(d);
         for( uint j = 0 ; j < n ; j++ ){
             res *= a[j][j];
@@ -89,7 +99,7 @@ double det_rec_1(const std::vector<std::vector< double>> matrix, const uint &siz
 
 double det_rec_2(const std::vector<std::vector< double>> matrix, const uint &size){
     double res = 0;
-    int h, k;
+    uint h, k;
     std::vector<std::vector< double > > m;
     m = std::vector< std::vector< double > >(size-1, std::vector<double>(size-1));
 
@@ -122,6 +132,7 @@ double det_rec_2(const std::vector<std::vector< double>> matrix, const uint &siz
     }
 }
 
+
 double det(al::Matrix &matrix){
     std::vector<std::vector< double > > m = matrix.get_matrix();
     uint size = matrix.get_size();
@@ -132,7 +143,30 @@ double det(al::Matrix &matrix){
     std::vector<double> vv = std::vector<double>(size);
     LU_decompos(m, size, indx, d, vv);
     // std::cout << "Determinante crout: " << LU_determ(m, size, indx, d) << std::endl << std::endl;
-    return LU_determ(m, size, indx, d);
+    return LU_determ(m, size, d);
+}
+
+
+void print_help(){
+    std::cout << "The program syntax is:" << std::endl << std::endl;
+    std::cout << "\t\e[1m./main -l <uint> -u <uint> -i <uint> -f <uint>\e[m" << std::endl << std::endl;
+    std::cout << "\e[1m-l <uint>\e[m  : Lower number to create the matrix.      (\e[4mRequired\e[m)" << std::endl;
+    std::cout << "\e[1m-u <uint>\e[m  : Upper number to create the matrix.      (\e[4mRequired\e[m)" << std::endl;
+    std::cout << "\e[1m-i <uint>\e[m  : Increment size while creating matrices. (\e[4mRequired\e[m)" << std::endl;
+    std::cout << "\e[1m-f <uint>\e[m  : Fibonacci number to calculate.          (\e[4mRequired\e[m)" << std::endl;
+    std::cout << "\e[1m-h\e[m         : Displays the help." << std::endl << std::endl;
+}
+
+
+void generate_graph(const std::map<uint, uint64_t> &time_lapse, const char *output){
+    std::ofstream f(output);
+    for( auto it = time_lapse.begin() ; it != time_lapse.end() ; ++it ){
+        f << it->first << " " << it->second << std::endl;
+    }
+    f.close();
+    std::string cmd = "./graph_maker.sh " + std::string(output);
+    FILE * aux = popen(cmd.c_str(), "r");
+    pclose(aux);
 }
 
 #endif
