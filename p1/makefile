@@ -1,15 +1,15 @@
-CPPFLAGS = -g -Wall -Wextra -std=c++11 -c -DNDEBUG
+CPPFLAGS = -g -O3 -std=c++11 -c -lrt #-DNDEBUG
 OBJECT = main.o
 BIN = main
 
 all: $(BIN)
-	rm -rf $(OBJECT)
+	@rm -rf $(OBJECT)
 
-main: $(OBJECT)
+$(BIN): $(OBJECT)
 	g++ -o $(BIN) $(OBJECT)
 
-main.o: *.cpp *.hpp
+$(OBJECT): *.cpp *.hpp
 	g++ $(CPPFLAGS) main.cpp
 
 clean:
-	rm -rf $(OBJECT) $(BIN)
+	@rm -rf $(OBJECT) $(BIN) *.eps *.dat

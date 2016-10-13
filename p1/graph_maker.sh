@@ -1,5 +1,7 @@
 #!/bin/bash
+# Nombre del fichero de entrada
 input=$1
+# Nombre del fichero de salida (Igual que el de entrada pero acabado en .eps)
 output=${input%.*}.eps
 cat << _end_ | gnuplot 2> /dev/null
 set terminal postscript eps color
