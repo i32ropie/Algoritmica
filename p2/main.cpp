@@ -5,7 +5,7 @@
 
 int main(int argc, char const *argv[]) {
     int m = atoi(argv[1]);
-    hanoi(m);
+    hanoi(m, 1, 3);
 //    int n = atoi(argv[1]), k = atoi(argv[2]);
 //    std::vector<std::vector< int > > v;
 //    v = std::vector<std::vector< int > >(n, std::vector<int>(k));

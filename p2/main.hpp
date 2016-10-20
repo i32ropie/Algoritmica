@@ -36,10 +36,6 @@ int combinatorio_recursivo_2(const int &n, const int &k, std::vector<std::vector
     return a;
 }
 
-void hanoi(int &m){
-    hanoi(m, 1, 3);
-}
-
 void hanoi(int &m, int &i, int &j){
     if(m > 0){
         hanoi(m-1, i, 6 - i - j);
