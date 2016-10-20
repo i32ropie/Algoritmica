@@ -8,7 +8,7 @@ all: $(BIN)
 $(BIN): $(OBJECT)
 	g++ -o $(BIN) $(OBJECT)
 
-$(OBJECT): *.cpp #*.hpp
+$(OBJECT): *.cpp *.hpp
 	g++ $(CPPFLAGS) main.cpp
 
 clean:

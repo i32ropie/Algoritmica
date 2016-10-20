@@ -36,7 +36,7 @@ int combinatorio_recursivo_2(const int &n, const int &k, std::vector<std::vector
     return a;
 }
 
-void hanoi(int &m, int &i, int &j){
+void hanoi(int m, int i, int j){
     if(m > 0){
         hanoi(m-1, i, 6 - i - j);
         std::cout << "Movemos la pieza superior de " << i << " a " << j << "." << std::endl;
