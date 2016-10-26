@@ -51,7 +51,7 @@ namespace al{
         int _disks;
         int _sum;
     public:
-        Hanoi(const int &disks): _disks(disks), _sticks(3), _moves(0){
+        Hanoi(const int &disks): _moves(0), _sticks(3), _disks(disks){
             _helper = std::vector<std::vector<int>>(_sticks, std::vector<int>());
             for(int i = _disks ; i > 0 ; --i)
                 _helper[0].push_back(i);
@@ -79,11 +79,12 @@ namespace al{
                 if(graphical){
                     cls();
                     std::cout << std::endl << std::endl << *this << std::endl;
+                    std::cout << "Movemos la pieza superior de " << i << " a " << j << std::endl;
                 }
-                std::cout << "Movemos la pieza superior de " << i << " a " << j << std::endl;
+
                 _moves++;
                 if(graphical)
-                    sleep(1);
+                    usleep(500000);
                 this->solve_hanoi(graphical, m - 1, _sum - i - j, j);
             }
         }
@@ -112,7 +113,10 @@ namespace al{
                 for( int i = 0 ; i < aux1.size() ; ++i ){
                     std::cout << aux1[i];
                 }
-                std::cout << base(height) << "   " << base(height) << "   " << base(height) << std::endl;
+                for( int i = 0 ; i < helper.size() ; ++i ){
+                    std::cout << base(height) << "   ";
+                }
+                std::cout << std::endl;
             }
             return output;
         }

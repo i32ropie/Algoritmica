@@ -9,7 +9,6 @@
 #include <iostream>
 #include <cmath>
 #include "matrix.hpp"
-// #include "main.hpp"
 #include "extra_functions.hpp"
 
 /**
@@ -30,9 +29,8 @@ namespace al{
             uint _params;
             bool _lineal;
         public:
-            Statistical(/*const uint &params,*/ const bool &lineal){
+            Statistical(const bool &lineal){
                 this->set_lineal(lineal);
-                // this->set_params(params);
             }
             inline bool get_lineal() { return _lineal; }
             inline std::vector<long double> get_params_value() { return _params_value; }
@@ -145,7 +143,7 @@ namespace al{
                 }
                 var1 /= size;
                 var2 /= size;
-                this->set_coef(var1>var2?var2/var1:var2/var1);
+                this->set_coef(var2/var1);
             }
             void estimate_times(const uint &params){
                 this->set_params(params);

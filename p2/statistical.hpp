@@ -28,9 +28,8 @@ namespace al{
             uint _params;
             bool _lineal;
         public:
-            Statistical(/*const uint &params,*/ const bool &lineal){
+            Statistical(const bool &lineal){
                 this->set_lineal(lineal);
-                // this->set_params(params);
             }
             inline bool get_lineal() { return _lineal; }
             inline std::vector<long double> get_params_value() { return _params_value; }

@@ -188,18 +188,13 @@ int main(int argc, char *argv[]){
 #ifdef NDEBUG
     std::cout << "\e[1;33m[DEBUG]\e[m-Generating second graph." << std::endl;
 #endif
-    // std::cout << "Ecuación de estimación determinante (ajuste orden " << orden << "):" << std::endl << "\t";
     stats_matrix.estimate_times(orden);
-    // std::cout << "Ecuación de estimación fibonacci:" << std::endl << "\t";
     stats_fibo.estimate_times(2);
     stats_matrix.dump_stats("matrix.dat");
     stats_fibo.dump_stats("fibo.dat");
-    // std::cout << std::endl << "Coeficiente de determinación determinante: " << stats_matrix.get_coef() << std::endl;
-    // std::cout << "Coeficiente de determinación fibo: " << stats_fibo.get_coef() << std::endl;
     bool leave = false;
     do {
         option = opciones();
-        // option = 0;
         switch (option) {
             case 0:
                 despedida();
