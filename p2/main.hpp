@@ -13,27 +13,12 @@
 
 
 long long combinatorio_iterativo(const int &n,const int &k){
-//    std::string cmd = "./comb_it.py " + std::to_string(n) + " " + std::to_string(k);
-//    std::string out = "";
-//    FILE * aux = popen(cmd.c_str(), "r");
-//    char * lineptr;
-//    size_t z;
-//    ssize_t s;
-//    do{
-//        lineptr = NULL;
-//        s = getline(&lineptr, &z, aux);
-//        out += std::to_string(*lineptr);
-//    }while(s > 0);
-//    pclose(aux);
-
-//    long long fact_n = 1, fact_k = 1, fact_nk = 1;
-
     long double fact_n = 1, fact_k = 1, fact_nk = 1;
-    for( int i = 2 ; i <= n ; ++i )
+    for( long double i = 2 ; i <= n ; ++i )
         fact_n *= i;
-    for( int i = 2 ; i <= k ; ++i )
+    for( long double i = 2 ; i <= k ; ++i )
         fact_k *= i;
-    for( int i = 2 ; i <= (n-k) ; ++i )
+    for( long double i = 2 ; i <= (n-k) ; ++i )
         fact_nk *= i;
     return fact_n/fact_k/fact_nk;
 }
@@ -209,10 +194,6 @@ int opciones_comb(){
     return opcion;
 }
 
-
-
-
-
 int opciones_stats(){
     int opcion;
     do{
@@ -263,15 +244,13 @@ void menu_combinatoria(const int &type){
         for( int j = 0 ; j <= i ; ++j ){
             aux_timer2 = 0;
             for( int k = 0 ; k < n_rpt ; ++k ){
-//                int res;
                 long long res;
-//                timer.start();
-//                int res = table? combinatorio_recursivo_2(i,j);
-//                timer.stop();
                 std::vector<std::vector< long long > > v = std::vector<std::vector< long long > >(i, std::vector<long long>(j));
-                for( int z = 0 ; z < i ; ++z ){
-                    for( int t = 0 ; t < j ; ++t )
-                        v[z][t] = -1;
+                if(type == 2){
+                    for( int z = 0 ; z < i ; ++z ){
+                        for( int t = 0 ; t < j ; ++t )
+                            v[z][t] = -1;
+                    }
                 }
                 timer.start();
                 switch (type){
@@ -285,9 +264,7 @@ void menu_combinatoria(const int &type){
                         res = combinatorio_iterativo(i, j);
                         break;
                 }
-//                std::cout << res << std::endl;
                 timer.stop();
-//                timer.restart();
                 aux_timer2 += timer.elapsed();
             }
             // t(i,0) + t(i,1) .. t(i,i)
@@ -334,8 +311,6 @@ void menu_combinatoria(const int &type){
                 break;
         }
     }while(!salir);
-//    volver();
-
 }
 
 void menu_combinatoria(){
@@ -351,7 +326,6 @@ void menu_combinatoria(){
                 menu_combinatoria(opcion);
         }
     }while(!salir);
-//    volver();
 }
 
 int opciones_hanoi(){
@@ -392,7 +366,6 @@ void calculo_hanoi(){
             aux_timer += timer.elapsed();
         }
         stats.add_test_size(i);
-//        std::cout << aux_timer/2 << std::endl;
         stats.add_elapsed_time(aux_timer/n_rpt);
     }
     stats.estimate_times(2);
@@ -435,7 +408,6 @@ void hanoi_grafico(){
     std::cout << std::endl << "Hanoi resuelto en " << h.get_moves() << " movimientos." << std::endl;
     volver(1);
 }
-
 
 void menu_hanoi(){
     int opcion;
