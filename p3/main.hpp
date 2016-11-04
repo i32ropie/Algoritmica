@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <unistd.h>
+#include <cstdlib>
 #include "entero.hpp"
 #define cls() system("clear");
 
@@ -73,8 +74,7 @@ void menu_sumas(){
         if(i!=0)
             std::cout << " + ";
         std::cout << numeros[i];
-        res = res + numeros[i];
-//        res += numeros[i];
+        res += numeros[i];
     }
     std::cout << " = " << res << std::endl;
     volver();
@@ -100,8 +100,7 @@ void menu_productos(){
         if(i!=0)
             std::cout << " * ";
         std::cout << numeros[i];
-        res = res * numeros[i];
-//        res *= numeros[i];
+        res *= numeros[i];
     }
     std::cout << " = " << res << std::endl;
     volver();

@@ -116,7 +116,7 @@ namespace al{
             return *(new Entero(res));
         }
 //        Uso de 4 productos y no 3 por no implementar resta.
-        Entero &operator *(Entero &entero){
+        Entero &operator *(const Entero &entero){
             std::string u = this->get_number();
             std::string v = entero.get_number();
 //            Añadimos ceros a la izquierda en el número más pequeño.
@@ -144,6 +144,14 @@ namespace al{
             b = b.get_number() + exp2;
             Entero res = a + b + c;
             return *(new Entero(res));
+        }
+        Entero &operator +=(const Entero &entero){
+            *this = *this + entero;
+            return *this;
+        }
+        Entero &operator *=(const Entero &entero){
+            *this = *this * entero;
+            return *this;
         }
         // TODO: Hacer sobrecarga del operador de resta e implementar algoritmo de multiplicación con tres productos.
     };
