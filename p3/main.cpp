@@ -1,12 +1,21 @@
-#include <iostream>
-#include "entero.hpp"
+#include "main.hpp"
 
 int main() {
-    al::Entero entero1, entero2;
-    std::cin >> entero1;
-//    std::cout << std::endl;
-    std::cin >> entero2;
-    std::cout << std::endl;
-    std::cout << entero1 << " * " << entero2 << " = " << entero1 * entero2 << std::endl;
+    int opcion;
+    bool salir = false;
+    do{
+        opcion = opciones();
+        switch(opcion){
+            case 0:
+                salir = true;
+                break;
+            case 1:
+                menu_sumas();
+                break;
+            case 2:
+                menu_productos();
+                break;
+        }
+    }while(!salir);
     return 0;
 }
