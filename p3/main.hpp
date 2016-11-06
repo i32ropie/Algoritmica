@@ -1,6 +1,9 @@
-//
-// Created by i32ropie on 4/11/16.
-//
+/**
+* @file main.hpp
+* @brief <Práctica 3> main.
+* @author Eduardo Roldán Pijuán
+* @date Noviembre de 2016
+*/
 
 #ifndef P3_MAIN_HPP
 #define P3_MAIN_HPP
@@ -12,6 +15,9 @@
 #include "entero.hpp"
 #define cls() system("clear");
 
+/**
+* @brief Cabecera que se mostrará durante la ejecución del programa.
+*/
 void cabecera(){
     cls();
     std::cout << "\e[1;92m###############################" << std::endl;
@@ -23,18 +29,32 @@ void cabecera(){
     std::cout << "###############################\e[0m" << std::endl << std::endl;
 }
 
+/**
+* @brief Mensaje que se muestra al final de cada opción del menú.
+*/
 void volver(){
     std::cout << std::endl << "Presiona ENTER para volver al menú.";
     std::cin.ignore();
     std::cin.ignore();
 }
 
+/**
+* @brief Muestra un error personalizado por pantalla.
+* @note Con 2 segundos de sleep da tiempo a leer los errores.
+* @param er Error a mostrar.
+*/
 void error(const std::string &er){
     std::cout << std::endl << "\e[31;1m[ERROR]\e[0m - " << er;
     fflush(stdout);
     sleep(2);
 }
 
+/**
+* @brief Muestra las opciones del menú e interactua con el usuario.
+* @return Opción del menú a ejecutar.
+* @sa error()
+* @sa cabecera()
+*/
 int opciones(){
     int opcion;
     do{
@@ -53,6 +73,11 @@ int opciones(){
     return opcion;
 }
 
+/**
+* @brief Opción sumas.
+* @sa cabecera()
+* @sa volver()
+*/
 void menu_sumas(){
     cabecera();
     int n;
@@ -80,6 +105,11 @@ void menu_sumas(){
     volver();
 }
 
+/**
+* @brief Opción productos.
+* @sa cabecera()
+* @sa volver()
+*/
 void menu_productos(){
     cabecera();
     int n;

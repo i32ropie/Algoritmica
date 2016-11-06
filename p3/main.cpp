@@ -1,4 +1,16 @@
+/**
+* @file main.cpp
+* @brief <Práctica 3> main.
+* @author Eduardo Roldán Pijuán
+* @date Noviembre de 2016
+*/
+
 #include "main.hpp"
+
+/**
+* @name Main
+* Programa principal.
+*/
 
 int main() {
     int opcion;

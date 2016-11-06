@@ -1,9 +1,10 @@
 /**
- * Created by i32ropie on 29/10/16.
- *
- * Clase basada en el algoritmo de karatsuba basado en el método
- * de divide y vencerás.
- */
+* @file entero.hpp
+* @brief <Práctica 3> Tipo de dato Entero.
+* @author Eduardo Roldán Pijuán
+* @date Noviembre de 2016
+*/
+
 #ifndef P3_ENTERO_HPP
 #define P3_ENTERO_HPP
 
@@ -13,31 +14,36 @@
 #include <iostream>
 #include <algorithm>
 
+/**
+ * @brief Espacio de nombres para la asignatura Algorítmica.
+ */
+
 namespace al{
+    /**
+     * @brief Functión que recibe una cadena y devuelve la primera mitad de esta.
+     * @param cad Cadena a dividir (std::string)
+     * @return Primera mitad de la cadena recibida como parámetro.
+     */
     inline std::string primera_mitad(const std::string &cad) { return cad.substr(0, cad.size() / 2); }
+    /**
+     * @brief Functión que recibe una cadena y devuelve la segunda mitad de esta.
+     * @param cad Cadena a dividir (std::string)
+     * @return Segunda mitad de la cadena recibida como parámetro.
+     */
     inline std::string segunda_mitad(const std::string &cad) { return cad.substr(cad.size() / 2); }
+    /**
+     * @brief Función que comprueba que una cadena se pueda transformar a un entero sin signo.
+     * @note Función adaptada de http://stackoverflow.com/a/2845275
+     * @param s Cadena a comprobar.
+     * @return true si s puede ser un entero sin signo false si no.
+     */
     bool is_int(const std::string & s) {
         if(s.empty() || !isdigit(s[0])) return false ;
         char * p ;
         strtol(s.c_str(), &p, 10) ;
         return (*p == 0) ;
     }
-//    Sobrecargamos el operador producto para strings (número a la derecha)
-    std::string operator *(const std::string &s,const size_t &count){
-        std::string ret;
-        for(size_t i = 0 ; i < count ; ++i){
-            ret += s;
-        }
-        return ret;
-    }
-//    Sobrecargamos el operador producto para strings (número a la izquierda)
-    std::string operator *(const size_t &count, const std::string &s){
-        std::string ret;
-        for(size_t i = 0 ; i < count ; ++i){
-            ret += s;
-        }
-        return ret;
-    }
+    /// Clase Entero.
     class Entero{
     private:
         std::string _number;
@@ -92,11 +98,12 @@ namespace al{
             std::string res;
             int overflow = 0;
 //            Añadimos ceros a la izquierda (derecha realmente porque hemos invertido la cadena) en el número más pequeño.
+//            Para ello, usamos la sexta versión del constructor de std::string -> http://www.cplusplus.com/reference/string/string/string/
             if(tmp1.size() != tmp2.size()){
                 if(tmp1.size() > tmp2.size())
-                    tmp2 += (tmp1.size()-tmp2.size())*std::string("0");
+                    tmp2 += std::string(tmp1.size()-tmp2.size(), '0');
                 else
-                    tmp1 += (tmp2.size()-tmp1.size())*std::string("0");
+                    tmp1 += std::string(tmp2.size()-tmp1.size(), '0');
             }
             for(uint i = 0 ; i < tmp1.size() ; ++i){
                 char c1 = tmp1[i], c2 = tmp2[i];
@@ -122,9 +129,9 @@ namespace al{
 //            Añadimos ceros a la izquierda en el número más pequeño.
             if(u.size() != v.size()){
                 if(u.size() > v.size())
-                    v = (u.size()-v.size())*std::string("0") + v;
+                    v = std::string(u.size()-v.size(), '0') + v;
                 else
-                    u = (v.size()-u.size())*std::string("0") + u;
+                    u = std::string(v.size()-u.size(), '0') + u;
             }
 //            Tanto u.size() como v.size() devuelve lo mismo ya que arriba hemos llenado con 0 el numero que tuviera menos tamaño
             int n = u.size();
@@ -135,8 +142,8 @@ namespace al{
             Entero x = segunda_mitad(u);
             Entero y = primera_mitad(v);
             Entero z = segunda_mitad(v);
-            std::string exp1 = std::string("0")*(2*s);
-            std::string exp2 = std::string("0")*s;
+            std::string exp1 = std::string(2*s, '0');
+            std::string exp2 = std::string(s, '0');
             Entero a = w * y;
             Entero b = x * y + w * z;
             Entero c = x * z;
