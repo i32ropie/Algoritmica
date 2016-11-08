@@ -19,18 +19,21 @@
  */
 
 namespace al{
+
     /**
      * @brief Functión que recibe una cadena y devuelve la primera mitad de esta.
      * @param cad Cadena a dividir (std::string)
      * @return Primera mitad de la cadena recibida como parámetro.
      */
     inline std::string primera_mitad(const std::string &cad) { return cad.substr(0, cad.size() / 2); }
+
     /**
      * @brief Functión que recibe una cadena y devuelve la segunda mitad de esta.
      * @param cad Cadena a dividir (std::string)
      * @return Segunda mitad de la cadena recibida como parámetro.
      */
     inline std::string segunda_mitad(const std::string &cad) { return cad.substr(cad.size() / 2); }
+
     /**
      * @brief Función que comprueba que una cadena se pueda transformar a un entero sin signo.
      * @note Función adaptada de http://stackoverflow.com/a/2845275
@@ -43,9 +46,11 @@ namespace al{
         strtol(s.c_str(), &p, 10) ;
         return (*p == 0) ;
     }
+
     /// Clase Entero.
     class Entero{
     private:
+
         /// Cadena con el número a almacenar.
         std::string _number;
         /// Número de de dígitos máximo que puede tener un número para multiplicarlo de forma directa.
@@ -65,6 +70,7 @@ namespace al{
                 std::reverse(_number.begin(), _number.end());
         }
     public:
+
         /** @name Constructores */
         /**
          * @brief Constructor con valores por defecto.
@@ -75,34 +81,40 @@ namespace al{
         Entero(const std::string &number = "0"):_number(number), _margin(4){
             this->quitar_ceros_no_significativos();
         }
+
         /**
          * @brief Constructor de copia
          * @param entero Entero del que crear el nuevo Entero.
          */
         Entero(const Entero &entero): _number(entero.get_number()), _margin(entero.get_margin()) {}
+
         /** @name Observadores */
         /**
          * @brief Devuelve la cadena con el número.
          * @return Cadena con el número.
          */
         inline std::string get_number() const { return _number; }
+
         /**
          * @brief Devuelve el márgen.
          * @return Margen.
          */
         inline int get_margin() const { return _margin; }
+
         /** @name Modificadores */
         /**
          * @brief Establece el número.
          * @param number Número (std::string)
          */
         inline void set_number(const std::string &number) { _number = number; }
+
         /**
          * @brief Establece el márgen.
          * @note Para asegurar un buen funcionamiento, no aceptamos márgenes superiores a 4.
          * @param margin Margen (int)
          */
         inline void set_margin(const int &margin) { _margin = margin > 4 ? 4 : margin; }
+
         /** @name Sobrecarga de operadores */
         /**
          * @brief Sobrecarga del operador <<
@@ -116,6 +128,7 @@ namespace al{
             output << entero.get_number();
             return output;
         }
+
         /**
          * @brief Sobrecarga del operador >>
          * @param input Flujo de entrada.
@@ -132,6 +145,7 @@ namespace al{
                 entero.set_number(tmp);
             return input;
         }
+
         /**
          * @brief Sobrecarga del operador = con un Entero.
          * @param entero Entero.
@@ -144,6 +158,7 @@ namespace al{
             this->set_margin(entero.get_margin());
             return *this;
         }
+
         /**
          * @brief Sobrecarga del operador = con una cadena.
          * @param numero Cadena
@@ -156,6 +171,7 @@ namespace al{
             this->set_margin(4);
             return *this;
         }
+
         /**
          * @brief Sobrecarga del operador +
          * @note Usado como margen 9 ya que suponiendo el peor de los casos, funcionará.
@@ -201,6 +217,7 @@ namespace al{
             std::reverse(res.begin(), res.end());
             return *(new Entero(res));
         }
+
         /**
          * @brief Sobrecarga del operador *
          * @note Uso del algoritmo que utiliza 4 productos para evitar sobrecargar el operador de resta.
@@ -240,6 +257,7 @@ namespace al{
             Entero res = a + b + c;
             return *(new Entero(res));
         }
+
         /**
          * @brief Sobrecarga del operador +=
          * @param entero Entero
@@ -249,9 +267,10 @@ namespace al{
             *this = *this + entero;
             return *this;
         }
+        
         /**
          * @brief Sobrecarga del operador *=
-         * @param entero
+         * @param entero Entero
          * @return Entero
          */
         Entero &operator *=(const Entero &entero){
