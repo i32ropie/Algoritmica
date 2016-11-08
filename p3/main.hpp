@@ -112,14 +112,19 @@ void menu_sumas(){
 */
 void menu_productos(){
     cabecera();
-    int n;
+    int n, margin;
     std::vector<al::Entero> numeros;
     std::cout << "Introduce cuántos números quieres multiplicar: ";
     std::cin >> n;
     std::cout << std::endl;
+    std::cout << "Introduce el número máximo de dígitos que pueden tener los números para " << std::endl;
+    std::cout << "multiplicarlos de forma directa: ";
+    std::cin >> margin;
+    fflush(stdout);
     cabecera();
     for(int i = 0 ; i < n ; ++i){
         al::Entero tmp;
+        tmp.set_margin(margin);
         std::cout << "[" << i+1 << "] - Introduce el número: ";
         std::cin >> tmp;
         numeros.push_back(tmp);

@@ -46,7 +46,14 @@ namespace al{
     /// Clase Entero.
     class Entero{
     private:
+        /// Cadena con el número a almacenar.
         std::string _number;
+        /// Número de de dígitos máximo que puede tener un número para multiplicarlo de forma directa.
+        int _margin;
+        /**
+         * @brief Función que quita los ceros no significativos del número.
+         * @note Es privada ya que el usuario de la clase no necesita usarla pues se usa internamente.
+         */
         void quitar_ceros_no_significativos() {
             std::reverse(_number.begin(), _number.end());
             while(_number[_number.size()-1] == '0'){
@@ -58,40 +65,112 @@ namespace al{
                 std::reverse(_number.begin(), _number.end());
         }
     public:
-        Entero(const std::string &number = "0"):_number(number){
+        /** @name Constructores */
+        /**
+         * @brief Constructor con valores por defecto.
+         * @note Añadido iniciación del margen a 4 por si el usuario de la clase olvida inicializarlo.
+         * @param number Número a almacenar dentro de la clase (std::string)
+         * @sa quitar_ceros_no_significativos()
+         */
+        Entero(const std::string &number = "0"):_number(number), _margin(4){
             this->quitar_ceros_no_significativos();
         }
-        Entero(const Entero &entero) { this->set_number(entero.get_number()); }
-        inline void set_number(const std::string &number) { _number = number; }
+        /**
+         * @brief Constructor de copia
+         * @param entero Entero del que crear el nuevo Entero.
+         */
+        Entero(const Entero &entero): _number(entero.get_number()), _margin(entero.get_margin()) {}
+        /** @name Observadores */
+        /**
+         * @brief Devuelve la cadena con el número.
+         * @return Cadena con el número.
+         */
         inline std::string get_number() const { return _number; }
+        /**
+         * @brief Devuelve el márgen.
+         * @return Margen.
+         */
+        inline int get_margin() const { return _margin; }
+        /** @name Modificadores */
+        /**
+         * @brief Establece el número.
+         * @param number Número (std::string)
+         */
+        inline void set_number(const std::string &number) { _number = number; }
+        /**
+         * @brief Establece el márgen.
+         * @note Para asegurar un buen funcionamiento, no aceptamos márgenes superiores a 4.
+         * @param margin Margen (int)
+         */
+        inline void set_margin(const int &margin) { _margin = margin > 4 ? 4 : margin; }
+        /** @name Sobrecarga de operadores */
+        /**
+         * @brief Sobrecarga del operador <<
+         * @param output Flujo de salida.
+         * @param entero Entero.
+         * @return Flujo de salida con el Entero ya impreso.
+         * @sa quitar_ceros_no_significativos()
+         */
         friend std::ostream &operator <<(std::ostream &output, Entero &entero){
             entero.quitar_ceros_no_significativos();
             output << entero.get_number();
             return output;
         }
+        /**
+         * @brief Sobrecarga del operador >>
+         * @param input Flujo de entrada.
+         * @param entero Entero.
+         * @return Flujo de entrada con el Entero ya leido.
+         * @sa is_int()
+         * @sa set_number()
+         */
         friend std::istream &operator >>(std::istream &input, Entero &entero){
             std::string tmp;
             input >> tmp;
-            // Asumimos que el usuario solo introducirá números positivos.
+//            Asumimos que el usuario solo introducirá números positivos.
             if(is_int(tmp))
                 entero.set_number(tmp);
             return input;
         }
+        /**
+         * @brief Sobrecarga del operador = con un Entero.
+         * @param entero Entero.
+         * @return Entero.
+         * @sa set_number()
+         * @sa set_margin()
+         */
         Entero &operator =(const Entero &entero){
             this->set_number(entero.get_number());
+            this->set_margin(entero.get_margin());
             return *this;
         }
+        /**
+         * @brief Sobrecarga del operador = con una cadena.
+         * @param numero Cadena
+         * @return Entero
+         * @sa set_number()
+         * @sa set_margin()
+         */
         Entero &operator =(const std::string &numero){
             this->set_number(numero);
+            this->set_margin(4);
             return *this;
         }
+        /**
+         * @brief Sobrecarga del operador +
+         * @note Usado como margen 9 ya que suponiendo el peor de los casos, funcionará.
+         * @param entero Entero.
+         * @return Suma de los enteros.
+         * @sa get_number()
+         */
         Entero &operator +(const Entero &entero){
 //            Cargamos los números en cadenas auxiliares y les damos la vuelta.
             std::string tmp1 = this->get_number();
             std::string tmp2 = entero.get_number();
-//            Si son numeros de hasta 8 cifras, podemos sumarlos de la forma tradicional.
+//            Si son numeros de hasta 9 cifras, podemos sumarlos de la forma tradicional.
+//            999999999 + 999999999 < 2147483647
             int n = tmp1.size() > tmp2.size() ? tmp1.size() : tmp2.size();
-            if(n<8)
+            if(n<10)
                 return *(new Entero(std::to_string(atoi(tmp1.c_str()) + atoi(tmp2.c_str()))));
             std::reverse(tmp1.begin(), tmp1.end());
             std::reverse(tmp2.begin(), tmp2.end());
@@ -122,7 +201,16 @@ namespace al{
             std::reverse(res.begin(), res.end());
             return *(new Entero(res));
         }
-//        Uso de 4 productos y no 3 por no implementar resta.
+        /**
+         * @brief Sobrecarga del operador *
+         * @note Uso del algoritmo que utiliza 4 productos para evitar sobrecargar el operador de resta.
+         * @param entero Entero
+         * @return Producto de los enteros.
+         * @sa get_number()
+         * @sa get_margin()
+         * @sa primera_mitad()
+         * @sa segunda_mitad()
+         */
         Entero &operator *(const Entero &entero){
             std::string u = this->get_number();
             std::string v = entero.get_number();
@@ -135,7 +223,7 @@ namespace al{
             }
 //            Tanto u.size() como v.size() devuelve lo mismo ya que arriba hemos llenado con 0 el numero que tuviera menos tamaño
             int n = u.size();
-            if(n<5)
+            if(n < this->get_margin())
                 return *(new Entero(std::to_string(atoi(u.c_str()) * atoi(v.c_str()))));
             int s = n%2 == 0? n/2 : n/2+1;
             Entero w = primera_mitad(u);
@@ -152,15 +240,24 @@ namespace al{
             Entero res = a + b + c;
             return *(new Entero(res));
         }
+        /**
+         * @brief Sobrecarga del operador +=
+         * @param entero Entero
+         * @return Entero
+         */
         Entero &operator +=(const Entero &entero){
             *this = *this + entero;
             return *this;
         }
+        /**
+         * @brief Sobrecarga del operador *=
+         * @param entero
+         * @return Entero
+         */
         Entero &operator *=(const Entero &entero){
             *this = *this * entero;
             return *this;
         }
-        // TODO: Hacer sobrecarga del operador de resta e implementar algoritmo de multiplicación con tres productos.
     };
 }
 
