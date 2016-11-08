@@ -267,7 +267,7 @@ namespace al{
             *this = *this + entero;
             return *this;
         }
-        
+
         /**
          * @brief Sobrecarga del operador *=
          * @param entero Entero
