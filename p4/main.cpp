@@ -1,8 +1,10 @@
-#include <iostream>
-#include "graph.hpp"
+//#include <iostream>
+//#include "algorithms.hpp"
+//#include "graph.hpp"
+
+#include "main.hpp"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    al::Graph g;
+    funcion_principal();
     return 0;
 }
