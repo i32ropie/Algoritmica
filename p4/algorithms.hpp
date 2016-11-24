@@ -55,6 +55,8 @@ std::pair<int, std::vector<int>> viajante_comercio(std::vector<std::vector<int>>
     }
     // Añadimos la ciudad principal otra vez, ya que hay que formar un ciclo.
     sol1.push_back(0);
+    // Y añadimos la distancia del último punto al origen.
+    sol2 += m[cur][0];
     std::pair<int, std::vector<int>> sol(sol2, sol1);
     return sol;
 }
