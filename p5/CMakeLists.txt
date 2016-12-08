@@ -3,5 +3,5 @@ project(p5)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp currency.hpp main.hpp)
 add_executable(p5 ${SOURCE_FILES})
