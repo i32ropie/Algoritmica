@@ -30,8 +30,10 @@ namespace al{
         std::vector<int> _solution_coins;
         /// Matriz con la cuál resolveremos dinámicamente el problema.
         std::vector<std::vector<int>> _aux;
-        /// Número de filas y columnas de la matriz.
-        int _fil, _col;
+        /// Número de filas de la matriz.
+        int _fil;
+        /// Número de columnas de la matriz.
+        int _col;
         /// Variable para comprobar si está resuelto o no el problema.
         bool _solved;
         /**

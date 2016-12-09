@@ -67,8 +67,8 @@ void presentacion(){
     std::cout << "Bienvenido. Con este programa podrá resolver el problema del cambio mediante" << std::endl;
     std::cout << "un algoritmo dinámico que propocionará la solución óptima." << std::endl;
     std::cout << std::endl << "Para asegurar el buen funcionamiento del programa, compruebe que el archivo " << std::endl;
-    std::cout << "\e[1m'currency.txt'\e[m existe en la ruta del ejecutable y contiene, en orden creciente," << std::endl;
-    std::cout << "el valor de las monedas que serán usadas en la resolución del problema." << std::endl;
+    std::cout << "\e[1m'currency.txt'\e[m existe en la ruta del ejecutable y contiene el valor de las" << std::endl;
+    std::cout << "monedas que serán usadas en la resolución del problema." << std::endl;
 
     volver(1, "Presiona ENTER para continuar.");
 }
