@@ -1,8 +1,21 @@
+/**
+* @file main.cpp
+* @brief <Práctica 4> main.
+* @author Eduardo Roldán Pijuán
+* @date Diciembre de 2016
+*/
+
 #include "main.hpp"
+
+/**
+* @name Main
+* Programa principal.
+*/
 
 int main() {
     int opcion;
     bool salir = false;
+    presentacion();
     do{
         opcion = opciones();
         switch(opcion){
@@ -11,10 +24,10 @@ int main() {
                 salir = true;
                 break;
             case 1:
-                menu_cambio();
+                resolver_cambio_basico();
                 break;
             case 2:
-                menu_mochila();
+                resolver_cambio_estadistico();
                 break;
         }
     }while(!salir);

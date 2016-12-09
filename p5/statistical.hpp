@@ -19,7 +19,7 @@ namespace al{
             uint _params;
             bool _lineal;
         public:
-            Statistical(const bool &lineal){
+            Statistical(const bool &lineal = true){
                 this->set_lineal(lineal);
             }
             inline bool get_lineal() { return _lineal; }

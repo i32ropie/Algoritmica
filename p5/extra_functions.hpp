@@ -1,3 +1,10 @@
+/**
+* @file extra_functions.hpp
+* @brief <Práctica 4> Funciones auxiliares
+* @author Eduardo Roldán Pijuán
+* @date Diciembre de 2016
+*/
+
 #ifndef __EXTRA_FUNCTIONS_HPP__
 #define __EXTRA_FUNCTIONS_HPP__
 
@@ -5,6 +12,12 @@
 #include <vector>
 #include <cmath>
 
+/**
+ * @brief Función que calcula el determinante de una matriz.
+ * @param matrix Matriz sobre la que calcular el determinante (std::vector<std::vector< long double > >)
+ * @param size Tamaño de la matriz (uint)
+ * @return Valor del determinante de una matriz calculado recursivamente.
+ */
 long double det_rec(const std::vector<std::vector< long double >> matrix, const uint &size){
     long double res = 0, aux = 0;
     int c;
@@ -31,6 +44,14 @@ long double det_rec(const std::vector<std::vector< long double >> matrix, const 
     return res;
 }
 
+/**
+ * @brief Función que resuelve un sistema de ecuaciones con el método de Cramer.
+ * @param params Número de variables del sistema (uint)
+ * @param aux Matriz con los términos independientes (std::vector<std::vector< long double > >)
+ * @param aux2 Vector con los términos dependientes (std::vector< long double >)
+ * @return Vector con el resultado del sistema de ecuaciones (std::vector< long double >)
+ * @sa det_rec()
+ */
 std::vector<long double> cramer(const uint &params, std::vector<std::vector< long double > > &aux, std::vector< long double > &aux2){
     std::vector<long double> params_value;
     for( int i = 0 ; i < params ; ++i ){
@@ -44,6 +65,13 @@ std::vector<long double> cramer(const uint &params, std::vector<std::vector< lon
     return params_value;
 }
 
+/**
+ * @brief Función que transforma un vector dependiendo del ajuste que se busque.
+ * @note Solo admite un ajuste exponencial pero se puede añadir fácilmente cualquier otro.
+ * @param test_size Vector relleno con los valores usados en pruebas (std::vector<uint>)
+ * @param lineal Variable con la que sabremos si debemos o no modificar el vector (bool)
+ * @return Vector con los valores usados transformado adecuadamente.
+ */
 std::vector<uint> transform_test_size(const std::vector<uint> &test_size, const bool &lineal){
     std::vector<uint> res;
     if(!lineal){
@@ -57,6 +85,12 @@ std::vector<uint> transform_test_size(const std::vector<uint> &test_size, const 
     return res;
 }
 
+/**
+ * @brief Función con la que realizar un ajuste polinómico (Términos independientes)
+ * @param params Número de variables del sistema (uint)
+ * @param test_size Vector relleno con los valores usados en pruebas (std::vector<uint>)
+ * @param aux Matriz sobre la que aplicar el algoritmo (std::vector<std::vector< long double > >)
+ */
 void indep_terms(const uint &params, const std::vector<uint> &test_size, std::vector<std::vector< long double > > &aux){
     long double tmp;
     int n = test_size.size();
@@ -76,6 +110,13 @@ void indep_terms(const uint &params, const std::vector<uint> &test_size, std::ve
     }
 }
 
+/**
+ * @brief Función con la que realizar un ajuste polinómico (Términos dependientes)
+ * @param params Número de variables del sistema (uint)
+ * @param test_size Vector relleno con los valores usados en pruebas (std::vector<uint>)
+ * @param elapsed_time Vector relleno con los valores de tiempo calculados en pruebas (std::vector<uint64_t>)
+ * @param aux Vector sobre el que aplicar el algoritmo (std::vector< long double >)
+ */
 void dep_terms(const uint &params, const std::vector<uint> &test_size, const std::vector<uint64_t> &elapsed_time, std::vector<long double> &aux){
     long double tmp;
     int n = test_size.size();
