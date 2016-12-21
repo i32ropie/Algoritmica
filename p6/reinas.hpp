@@ -8,6 +8,7 @@
 #include <vector>
 #include <cstdlib>
 #include <iostream>
+#include <cstdint> // Para usar uint64_t
 #include <algorithm>
 
 namespace al {
@@ -24,11 +25,11 @@ namespace al {
     private:
         std::vector<std::vector<int>> _soluciones;
         int _reinas;
-        int _intentos;
+        uint64_t _intentos;
     public:
         Reinas(const int &reinas): _reinas(reinas), _intentos(0) {}
         inline int get_numero_soluciones() const { return _soluciones.size(); }
-        inline int get_intentos() const { return _intentos; }
+        inline uint64_t get_intentos() const { return _intentos; }
         inline std::vector<std::vector<int>> get_soluciones() const { return _soluciones; }
         void resolver_probabilistico() {
             if( _reinas <= 3 )

@@ -250,12 +250,38 @@ void las_vegas_1(){
     al::Reinas r(n);
     r.resolver_probabilistico();
     mostrar_soluciones(r.get_soluciones());
-    std::cout << "";
+    std::cout << "Solución obtenida en " << r.get_intentos() << " intentos." << std::endl;
     volver(1);
 }
 
 void las_vegas_2(){
     cabecera();
+    std::vector<int> aux = {0, 0, 0, 0, 2, 10, 4, 40, 92, 352, 724, 2680, 14200, 73712};
+    std::string aux2;
+    int n;
+    int pruebas = 0;
+    std::cout << "Introduce el número de reinas (mayor que 3): ";
+    std::cin >> n;
+    std::cin.ignore();
+    al::Reinas r(n);
+    std::cout << std::endl << "Obteniendo las " << aux[n] << " soluciones para el problema de las " << n << " reinas." << std::endl;
+    while(r.get_soluciones().size() != aux[n]){
+        r.resolver_probabilistico();
+        pruebas++;
+    }
+    std::cout << std::endl << "Soluciones obtenidas tras " << pruebas << " pruebas." << std::endl << std::endl;
+    std::cout << "¿Desea ver las soluciones por pantalla? (s/n): ";
+    std::getline(std::cin, aux2);
+    if(aux2 == "s"){
+        mostrar_soluciones(r.get_soluciones());
+    }
+    aux.clear();
+    std::cout << "¿Desea exportar las soluciones? (s/n): ";
+    std::getline(std::cin, aux2);
+    if(aux2 == "s"){
+        std::cout << std::endl << "Podrá encontrar la salida en: " << exportar_soluciones(r.get_soluciones()) << std::endl;
+    }
+    volver(1);
 
 }
 
