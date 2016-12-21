@@ -36,7 +36,7 @@ namespace al {
             std::vector<int> aux(_reinas, -1);
             int k = 0;
             while(k < _reinas){
-                aux[k] = rand()%_reinas + 1;
+                aux[k] = rand()%_reinas;
                 if(lugar(k, aux)){
                     ++k;
                 }

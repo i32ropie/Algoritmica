@@ -14,7 +14,7 @@ int main(){
                 resolver_backtracking();
                 break;
             case 2:
-//                menu_las_vegas();
+                menu_las_vegas();
                 break;
             case 3:
 //                resolver_estadisticos();

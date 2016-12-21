@@ -205,7 +205,6 @@ void resolver_backtracking(){
     std::cout << "Introduce el número de reinas (mayor de 3): ";
     std::cin >> n;
     std::cin.ignore();
-//    std::cin.ignore();
     al::Reinas r(n);
     std::cout << "Resolviendo..." << std::endl << std::endl;
     r.resolver_backtracking();
@@ -222,6 +221,61 @@ void resolver_backtracking(){
         std::cout << std::endl << "Podrá encontrar la salida en: " << exportar_soluciones(r.get_soluciones()) << std::endl;
     }
     volver(1);
+}
+
+int opciones_las_vegas(){
+    int opcion;
+    do{
+        cabecera();
+        std::cout << "Estas son las opciones disponibles:" << std::endl;
+        std::cout << "\t\e[33;1m[1]\e[0m - Solución única." << std::endl;
+        std::cout << "\t\e[33;1m[2]\e[0m - Todas las soluciones." << std::endl;
+        std::cout << "\t\e[33;1m[0]\e[0m - Salir del programa." << std::endl;
+        std::cout << "Introduce tu opción: \e[33;1m";
+        std::cin >> opcion;
+        std::cout << "\e[0m";
+        if(opcion<0 || opcion>2){
+            error("Opción no válida...");
+        }
+    }while(opcion<0 || opcion>2);
+    return opcion;
+}
+
+void las_vegas_1(){
+    cabecera();
+    int n;
+    std::cout << "Introduce el número de reinas (mayor que 3): ";
+    std::cin >> n;
+    std::cin.ignore();
+    al::Reinas r(n);
+    r.resolver_probabilistico();
+    mostrar_soluciones(r.get_soluciones());
+    std::cout << "";
+    volver(1);
+}
+
+void las_vegas_2(){
+    cabecera();
+
+}
+
+void menu_las_vegas(){
+    int opcion;
+    bool salir = false;
+    do{
+        opcion = opciones_las_vegas();
+        switch(opcion){
+            case 0:
+                salir = true;
+                break;
+            case 1:
+                las_vegas_1();
+                break;
+            case 2:
+                las_vegas_2();
+                break;
+        }
+    }while(!salir);
 }
 
 #endif //P6_MAIN_HPP

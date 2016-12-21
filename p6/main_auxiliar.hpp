@@ -17,25 +17,29 @@ struct tablero{
     std::string reina = "♛ ";
 };
 
+void imprimir_tablero(const std::vector<int> &sol){
+    for(int i = 0 ; i < sol.size() ; ++i){
+        for(int j = 0 ; j < sol.size() ; ++j){
+            if(j == sol[i]){
+                std::cout << "\e[101m  ";
+            }
+            else if((i+j)%2==0){
+                std::cout << "\e[47m  ";
+            }
+            else{
+                std::cout << "\e[40m  ";
+            }
+        }
+        std::cout << "\e[m" << std::endl;
+    }
+    std::cout << std::endl;
+}
+
 void mostrar_soluciones(const std::vector<std::vector<int>> &soluciones){
     for(int k = 0 ; k < soluciones.size() ; ++k){
         std::cout << "Solución " << k+1 << std::endl;
         std::vector<int> sol = soluciones[k];
-        for(int i = 0 ; i < sol.size() ; ++i){
-            for(int j = 0 ; j < sol.size() ; ++j){
-                if(j == sol[i]){
-                    std::cout << "\e[101m  ";
-                }
-                else if((i+j)%2==0){
-                    std::cout << "\e[47m  ";
-                }
-                else{
-                    std::cout << "\e[40m  ";
-                }
-            }
-            std::cout << "\e[m" << std::endl;
-        }
-        std::cout << std::endl;
+        imprimir_tablero(sol);
     }
 }
 
