@@ -1,0 +1,17 @@
+# Nombre del proyecto
+PROJECT_NAME           = Práctica 6
+
+# Idioma: español
+OUTPUT_LANGUAGE        = Spanish
+
+# Muestra la parte privada
+EXTRACT_PRIVATE        = YES
+
+# Muestra los ficheros
+SOURCE_BROWSER         = YES
+
+# No se genera la documentación en latex
+GENERATE_LATEX         = NO
+
+# Excluir el readme
+EXCLUDE                = README.md
