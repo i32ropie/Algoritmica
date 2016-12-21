@@ -1,6 +1,25 @@
 #include "main.hpp"
 
 int main(){
-    cabecera();
+    int opcion;
+    bool salir = false;
+    do{
+        opcion = opciones();
+        switch(opcion){
+            case 0:
+                despedida();
+                salir = true;
+                break;
+            case 1:
+                resolver_backtracking();
+                break;
+            case 2:
+//                menu_las_vegas();
+                break;
+            case 3:
+//                resolver_estadisticos();
+                break;
+        }
+    }while(!salir);
     return 0;
 }

@@ -11,4 +11,4 @@ main.o: *.cpp *.hpp
 	g++ $(CPPFLAGS) main.cpp
 
 clean:
-	@rm -rf $(OBJECT) $(BIN) *.eps *.dat
+	@rm -rf $(OBJECT) $(BIN) *.eps *.dat soluciones

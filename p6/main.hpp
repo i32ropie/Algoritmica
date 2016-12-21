@@ -7,6 +7,7 @@
 #include <cmath>
 #include "statistical.hpp"
 #include "reinas.hpp"
+#include "main_auxiliar.hpp"
 
 #ifdef __linux__
     #define cls() system("clear");
@@ -183,17 +184,44 @@ int opciones(){
     do{
         cabecera();
         std::cout << "Estas son las opciones disponibles:" << std::endl;
-        std::cout << "\t\e[33;1m[1]\e[0m - Resolver el problema de las N-Reinas mediante backtracking." << std::endl;
-        std::cout << "\t\e[33;1m[2]\e[0m - Resolver el problema de las N-Reinas mediante ." << std::endl;
+        std::cout << "\t\e[33;1m[1]\e[0m - Resolver mediante backtracking." << std::endl;
+        std::cout << "\t\e[33;1m[2]\e[0m - Resolver mediante Las Vegas." << std::endl;
+        std::cout << "\t\e[33;1m[3]\e[0m - Cálculo de estadísticos." << std::endl;
         std::cout << "\t\e[33;1m[0]\e[0m - Salir del programa." << std::endl;
         std::cout << "Introduce tu opción: \e[33;1m";
         std::cin >> opcion;
         std::cout << "\e[0m";
-        if(opcion<0 || opcion>2){
+        if(opcion<0 || opcion>3){
             error("Opción no válida...");
         }
-    }while(opcion<0 || opcion>2);
+    }while(opcion<0 || opcion>3);
     return opcion;
+}
+
+void resolver_backtracking(){
+    cabecera();
+    int n;
+    std::string aux;
+    std::cout << "Introduce el número de reinas (mayor de 3): ";
+    std::cin >> n;
+    std::cin.ignore();
+//    std::cin.ignore();
+    al::Reinas r(n);
+    std::cout << "Resolviendo..." << std::endl << std::endl;
+    r.resolver_backtracking();
+    std::cout << r << std::endl;
+    std::cout << "¿Desea ver las soluciones por pantalla? (s/n): ";
+    std::getline(std::cin, aux);
+    if(aux == "s"){
+        mostrar_soluciones(r.get_soluciones());
+    }
+    aux.clear();
+    std::cout << "¿Desea exportar las soluciones? (s/n): ";
+    std::getline(std::cin, aux);
+    if(aux == "s"){
+        std::cout << std::endl << "Podrá encontrar la salida en: " << exportar_soluciones(r.get_soluciones()) << std::endl;
+    }
+    volver(1);
 }
 
 #endif //P6_MAIN_HPP
