@@ -16,9 +16,6 @@ int main(){
             case 2:
                 menu_las_vegas();
                 break;
-            case 3:
-//                resolver_estadisticos();
-                break;
         }
     }while(!salir);
     return 0;
