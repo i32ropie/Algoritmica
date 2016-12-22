@@ -13,7 +13,7 @@
 #elif _WIN32
     #define cls() system("cls");
 #endif
-// Problema de las N-Reinas
+
 /**
 * @brief Cabecera que se mostrará durante la ejecución del programa.
 */
@@ -176,7 +176,6 @@ void las_vegas_2(){
         std::cout << std::endl << "Podrá encontrar la salida en: " << exportar_soluciones(r.get_soluciones()) << std::endl;
     }
     volver(1);
-
 }
 
 void menu_las_vegas(){
