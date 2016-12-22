@@ -124,6 +124,7 @@ namespace al {
          * @param output Flujo de salida.
          * @param r Reinas.
          * @return Flujo de salida con el número de soluciones obtenidas.
+         * @sa get_numero_soluciones()
          */
         friend std::ostream &operator <<(std::ostream &output, const Reinas &r){
             if( r._reinas <= 3 ){
