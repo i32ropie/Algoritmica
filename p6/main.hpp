@@ -1,3 +1,10 @@
+/**
+* @file main.hpp
+* @brief <Práctica 6> main.
+* @author Eduardo Roldán Pijuán
+* @date Diciembre de 2016
+*/
+
 #ifndef P6_MAIN_HPP
 #define P6_MAIN_HPP
 
@@ -6,7 +13,7 @@
 #include <unistd.h>
 #include <cmath>
 #include "reinas.hpp"
-#include "main_auxiliar.hpp"
+#include "extra_functions.hpp"
 
 #ifdef __linux__
     #define cls() system("clear");
@@ -92,6 +99,14 @@ int opciones(){
     return opcion;
 }
 
+/**
+ * @brief Interfaz para resolver el problema de las N-Reinas por backtracking.
+ * @note Opción 1 del menú.
+ * @sa cabecera()
+ * @sa mostrar_soluciones()
+ * @sa exportar_soluciones()
+ * @sa volver()
+ */
 void resolver_backtracking(){
     cabecera();
     int n;
@@ -117,6 +132,12 @@ void resolver_backtracking(){
     volver(1);
 }
 
+/**
+ * @brief Muestra las opciones del menú Las Vegas e interactua con el usuario.
+ * @return Opción del menú a ejecutar.
+ * @sa error()
+ * @sa cabecera()
+ */
 int opciones_las_vegas(){
     int opcion;
     do{
@@ -135,6 +156,13 @@ int opciones_las_vegas(){
     return opcion;
 }
 
+/**
+ * @brief Interfaz para resolver el problema de las N-Reinas mediante Las Vegas.
+ * @note Solo se obtendrá una solución.
+ * @sa cabecera()
+ * @sa mostrar_soluciones()
+ * @sa volver()
+ */
 void las_vegas_1(){
     cabecera();
     int n;
@@ -148,6 +176,14 @@ void las_vegas_1(){
     volver(1);
 }
 
+/**
+ * @brief Interfaz para resolver el problema de las N-Reinas mediante Las Vegas.
+ * @note Se obtendrán todas las soluciones, contabilizando el número de pruebas necesáreas.
+ * @sa cabecera()
+ * @sa mostrar_soluciones()
+ * @sa exportar_soluciones()
+ * @sa volver()
+ */
 void las_vegas_2(){
     cabecera();
     std::vector<int> aux = {0, 0, 0, 0, 2, 10, 4, 40, 92, 352, 724, 2680, 14200, 73712};
@@ -178,6 +214,12 @@ void las_vegas_2(){
     volver(1);
 }
 
+/**
+ * @brief Menú para la evaluación del algoritmo Las Vegas.
+ * @sa opciones_las_vegas()
+ * @sa las_vegas_1()
+ * @sa las_vegas_2()
+ */
 void menu_las_vegas(){
     int opcion;
     bool salir = false;
